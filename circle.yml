@@ -1,0 +1,6 @@
+dependencies:
+  override:
+    - mvn install -T 1C
+general:
+  artifacts:
+    - "target/mission-control-view.hpi"
