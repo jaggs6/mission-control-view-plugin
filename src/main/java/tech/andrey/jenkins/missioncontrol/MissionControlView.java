@@ -128,6 +128,22 @@ public class MissionControlView extends View {
         return hideBuildHistory ? "display: None" : "";
     }
 
+    public String getDisplayLeftSize() {
+        return getDisplayRight().equals("") ? "col-lg-6" : "col-lg-12";
+    }
+
+    public String getDisplayRightSize() {
+        return getDisplayLeft().equals("") ? "col-lg-6" : "col-lg-12";
+    }
+
+    public String getDisplayLeft() {
+        return hideBuildHistory && hideBuildQueue ? "display: None" : "";
+    }
+
+    public String getDisplayRight() {
+        return hideJobs && hideNodes ? "display: None" : "";
+    }
+
     public String getJobsHeight() {
         if (hideJobs)
             return "0";
@@ -348,8 +364,8 @@ public class MissionControlView extends View {
             }
 
             // Decode pipeline branch names
-            String fullName = j.getFullName();
-            try {fullName = java.net.URLDecoder.decode(j.getFullName(), "UTF-8");}
+            String fullName = j.getName();
+            try {fullName = java.net.URLDecoder.decode(j.getName(), "UTF-8");}
             catch (java.io.UnsupportedEncodingException e) {e.printStackTrace();}
 
             statuses.add(new JobStatus(fullName, status));

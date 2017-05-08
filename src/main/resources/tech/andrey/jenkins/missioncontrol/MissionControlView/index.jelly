@@ -27,8 +27,8 @@
                 </div>
             </a>
             <div class="container-fluid height100perc">
-                <!-- Left half -->
-                <div class="col-lg-6 right-border height100perc">
+                <!-- Left -->
+                <div class="${it.displayLeftSize} right-border height100perc" style="${it.displayLeft};">
                     <div class="col-lg-12 bottom-border" style="height:${it.buildHistoryHeight}%; ${it.displayBuildHistory};">
                         <h4>${%BuildHistory}</h4>
                         <!-- VIEW_URL/api/json -->
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <!-- Right half -->
-                <div class="col-lg-6 right-border height100perc">
+                <div class="${it.displayRightSize} right-border height100perc" style="${it.displayRight};">
                     <div class="col-lg-12 bottom-border" style="height:${it.jobsHeight}%; ${it.displayJobs};">
                         <h4>${%Jobs}</h4>
                         <!-- JENKINS_URL/api/json -->

@@ -35,8 +35,11 @@ function format_interval(iv) {
 function reload_jenkins_build_queue(tableSelector, jenkinsUrl, buildQueueSize) {
   $.getJSON( jenkinsUrl + '/queue/api/json', function( data ) {
     // Remove all existing rows
-    $(tableSelector + ' tbody').find('tr').remove(); 
+    $(tableSelector + ' tbody').find('tr').remove();
     i = 0;
+    data.items.sort(function(a, b) {
+      return a.inQueueSince - b.inQueueSince;
+    });
     $.each( data.items, function( key, val ) {
       i++;
       if (i > buildQueueSize) {
@@ -62,7 +65,7 @@ function reload_jenkins_node_statuses(divSelector, jenkinsUrl, nodeStatuses, but
         nodeLinkName = '(master)';
       else
         nodeLinkName = val.displayName;
-      newDiv = '<a href="' + jenkinsUrl + '/computer/' + encodeURIComponent(nodeLinkName) + '/"><button class="btn ' + buttonClass + ' ' + classes + ' col-lg-6">' + val.displayName + ' &#47; ' + val.numExecutors + '</button></a>';
+      newDiv = '<a href="' + jenkinsUrl + '/computer/' + encodeURIComponent(nodeLinkName) + '/"><button class="btn ' + buttonClass + ' ' + classes + ' col-lg-1">' + val.displayName + ' &#47; ' + val.numExecutors + '</button></a>';
       $(divSelector).append(newDiv);
     });
   });
@@ -131,7 +134,7 @@ function reload_jenkins_job_statuses(divSelector, viewUrl, buttonClass) {
           console.log('Job: ' + val.jobName + ' Status: ' + val.status);
           classes = 'btn-primary';
       }
-      newDiv = '<button class="btn ' + buttonClass + ' ' + classes + ' col-lg-6">' + val.jobName + '</button>';
+      newDiv = '<button class="btn ' + buttonClass + ' ' + classes + ' col-lg-3">' + val.jobName + '</button>';
       $(divSelector).append(newDiv);
     });
   });
